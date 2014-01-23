@@ -1,0 +1,13 @@
+w <- rnorm(100)
+xa <- filter(w, filter=c(0, -0.9), method="recursive")
+va <- filter(xa, filter=c(1/4, 1/4, 1/4, 1/4), method="convolution")
+xb <- cos(2*pi*(1:100)/4)
+vb <- filter(xb, filter=c(1/4, 1/4, 1/4, 1/4), method="convolution")
+xc <- cos(2*pi*(1:100)/4) + w
+vc <- filter(xc, filter=c(1/4, 1/4, 1/4, 1/4), method="convolution")
+par(mfcol=c(3,1))
+postscript(file="stat_153_solutions1_5.eps")
+plot(cbind(xa, va), plot.type="single", lty=1:2)
+plot(cbind(xb, vb), plot.type="single", lty=1:2)
+plot(cbind(xc, vc), plot.type="single", lty=1:2)
+dev.off()
